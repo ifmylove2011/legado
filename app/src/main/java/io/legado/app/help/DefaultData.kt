@@ -1,5 +1,6 @@
 package io.legado.app.help
 
+import android.util.Log
 import io.legado.app.constant.AppConst
 import io.legado.app.data.appDb
 import io.legado.app.data.entities.DictRule
@@ -99,6 +100,7 @@ object DefaultData {
             appCtx.assets.open("defaultData${File.separator}dictRules.json")
                 .readBytes()
         )
+        Log.d("defalut",json)
         GSON.fromJsonArray<DictRule>(json).getOrThrow()
     }
 
