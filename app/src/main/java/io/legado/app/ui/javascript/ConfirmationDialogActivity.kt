@@ -4,6 +4,8 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import io.legado.app.R
@@ -63,10 +65,9 @@ class ConfirmationDialogActivity : AppCompatActivity() {
             }
             finish()
         }
+        onBackPressedDispatcher.addCallback(this) {
+            finish()
+        }
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        finish()
-    }
 }
