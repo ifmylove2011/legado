@@ -1011,6 +1011,8 @@
     <string name="bitmap_cache_size">bitmap cache size</string>
     <string name="image_retain_number_summary">Keep the number of chapters read %s</string>
     <string name="image_retain_number">Number of manga reservations</string>
+    <string name="bookshelf_ask_delay_summary">Delay of Ask Bookshelf = %s second</string>
+    <string name="bookshelf_ask_delay">Delay of Ask Bookshelf</string>
     <string name="export_pics_file">Export Picture Files</string>
     <!-- string end -->
     <string name="error_decode_bitmap">Fail to decode bitmap</string>

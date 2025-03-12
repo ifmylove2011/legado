@@ -31,12 +31,14 @@ import io.legado.app.utils.LogUtils
 import io.legado.app.utils.getPrefBoolean
 import io.legado.app.utils.postEvent
 import io.legado.app.utils.putPrefBoolean
+import io.legado.app.utils.putPrefInt
 import io.legado.app.utils.putPrefString
 import io.legado.app.utils.removePref
 import io.legado.app.utils.restart
 import io.legado.app.utils.setEdgeEffectColor
 import io.legado.app.utils.showDialogFragment
 import splitties.init.appCtx
+import java.util.Locale
 
 /**
  * 其它设置
@@ -69,6 +71,7 @@ class OtherConfigFragment : PreferenceFragment(),
         upPreferenceSummary(PreferKey.checkSource, CheckSource.summary)
         upPreferenceSummary(PreferKey.bitmapCacheSize, AppConfig.bitmapCacheSize.toString())
         upPreferenceSummary(PreferKey.imageRetainNum, AppConfig.imageRetainNum.toString())
+        upPreferenceSummary(PreferKey.bookshelfAskDelay, AppConfig.bookshelfAskDelay.toString())
         upPreferenceSummary(PreferKey.sourceEditMaxLine, AppConfig.sourceEditMaxLine.toString())
     }
 
@@ -153,6 +156,8 @@ class OtherConfigFragment : PreferenceFragment(),
                     }
             }
 
+            PreferKey.bookshelfAskDelay -> showAskDelayDialog()
+
             PreferKey.clearWebViewData -> clearWebViewData()
             "localPassword" -> alertLocalPassword()
             PreferKey.shrinkDatabase -> shrinkDatabase()
@@ -219,6 +224,10 @@ class OtherConfigFragment : PreferenceFragment(),
             PreferKey.sourceEditMaxLine -> {
                 upPreferenceSummary(key, AppConfig.sourceEditMaxLine.toString())
             }
+
+            PreferKey.bookshelfAskDelay -> {
+                upPreferenceSummary(key, AppConfig.bookshelfAskDelay.toString())
+            }
         }
     }
 
@@ -237,6 +246,9 @@ class OtherConfigFragment : PreferenceFragment(),
 
             PreferKey.sourceEditMaxLine -> preference.summary =
                 getString(R.string.source_edit_max_line_summary, value)
+
+            PreferKey.bookshelfAskDelay -> preference.summary =
+                getString(R.string.bookshelf_ask_delay_summary, value)
 
             else -> if (preference is ListPreference) {
                 val index = preference.findIndexOfValue(value)
@@ -262,6 +274,26 @@ class OtherConfigFragment : PreferenceFragment(),
                     removePref(PreferKey.userAgent)
                 } else {
                     putPrefString(PreferKey.userAgent, userAgent)
+                }
+            }
+            cancelButton()
+        }
+    }
+
+    @SuppressLint("InflateParams")
+    private fun showAskDelayDialog() {
+        alert(getString(R.string.bookshelf_ask_delay)) {
+            val alertBinding = DialogEditTextBinding.inflate(layoutInflater).apply {
+                editView.hint = getString(R.string.bookshelf_ask_delay)
+                editView.setText(String.format(Locale. ROOT,"%d", AppConfig.bookshelfAskDelay))
+            }
+            customView { alertBinding.root }
+            okButton {
+                val delay = alertBinding.editView.text?.toString()?.toIntOrNull()
+                if (delay == null || delay < 0) {
+                    putPrefInt(PreferKey.bookshelfAskDelay, 60)
+                } else {
+                    putPrefInt(PreferKey.bookshelfAskDelay, delay)
                 }
             }
             cancelButton()

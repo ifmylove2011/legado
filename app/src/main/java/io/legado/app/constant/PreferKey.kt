@@ -125,6 +125,7 @@ object PreferKey {
     const val parallelExportBook = "parallelExportBook"
     const val progressBarBehavior = "progressBarBehavior"
     const val sourceEditMaxLine = "sourceEditMaxLine"
+    const val bookshelfAskDelay = "bookshelfAskDelay"
     const val ttsTimer = "ttsTimer"
     const val noAnimScrollPage = "noAnimScrollPage"
     const val webDavDeviceName = "webDavDeviceName"

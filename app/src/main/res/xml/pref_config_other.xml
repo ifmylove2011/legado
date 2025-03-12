@@ -115,6 +115,11 @@
             android:title="@string/image_retain_number" />
 
         <io.legado.app.lib.prefs.Preference
+            android:key="bookshelfAskDelay"
+            android:summary="@string/bookshelf_ask_delay_summary"
+            android:title="@string/bookshelf_ask_delay" />
+
+        <io.legado.app.lib.prefs.Preference
             android:key="preDownloadNum"
             android:summary="@string/pre_download_s"
             android:title="@string/pre_download" />

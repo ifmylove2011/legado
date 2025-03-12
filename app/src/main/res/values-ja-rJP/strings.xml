@@ -1008,6 +1008,8 @@
     <string name="bitmap_cache_size">bitmap cache size</string>
     <string name="image_retain_number_summary">保留已读章节数量 %s</string>
     <string name="image_retain_number">漫画保留数量</string>
+    <string name="bookshelf_ask_delay_summary">本棚の要求遅延 = %s 秒</string>
+    <string name="bookshelf_ask_delay">本棚の質問遅延</string>
     <string name="export_pics_file">Export Picture Files</string>
     <!-- string end -->
     <string name="error_decode_bitmap">Fail to decode bitmap</string>

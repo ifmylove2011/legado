@@ -560,6 +560,12 @@ object AppConfig : SharedPreferences.OnSharedPreferenceChangeListener {
             appCtx.putPrefInt(PreferKey.imageRetainNum, value)
         }
 
+    var bookshelfAskDelay:Int
+        get() = appCtx.getPrefInt(PreferKey.bookshelfAskDelay, 60)
+        set(value){
+            appCtx.putPrefInt(PreferKey.bookshelfAskDelay, value)
+        }
+
     var showReadTitleBarAddition: Boolean
         get() = appCtx.getPrefBoolean(PreferKey.showReadTitleAddition, true)
         set(value) {

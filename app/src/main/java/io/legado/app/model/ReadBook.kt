@@ -284,6 +284,10 @@ object ReadBook : CoroutineScope by MainScope() {
         }
     }
 
+    fun needAskBookshelf(): Boolean {
+        return readRecord.readTime > AppConfig.bookshelfAskDelay * 1000
+    }
+
     fun upMsg(msg: String?) {
         if (ReadBook.msg != msg) {
             ReadBook.msg = msg

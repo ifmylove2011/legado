@@ -1572,15 +1572,19 @@ class ReadBookActivity : BaseReadBookActivity(),
         if (!AppConfig.showAddToShelfAlert) {
             viewModel.removeFromBookshelf { super.finish() }
         } else {
-            alert(title = getString(R.string.add_to_bookshelf)) {
-                setMessage(getString(R.string.check_add_bookshelf, book.name))
-                okButton {
-                    ReadBook.book?.removeType(BookType.notShelf)
-                    ReadBook.book?.save()
-                    ReadBook.inBookshelf = true
-                    setResult(Activity.RESULT_OK)
+            if (ReadBook.needAskBookshelf()) {
+                alert(title = getString(R.string.add_to_bookshelf)) {
+                    setMessage(getString(R.string.check_add_bookshelf, book.name))
+                    okButton {
+                        ReadBook.book?.removeType(BookType.notShelf)
+                        ReadBook.book?.save()
+                        ReadBook.inBookshelf = true
+                        setResult(Activity.RESULT_OK)
+                    }
+                    noButton { viewModel.removeFromBookshelf { super.finish() } }
                 }
-                noButton { viewModel.removeFromBookshelf { super.finish() } }
+            } else {
+                viewModel.removeFromBookshelf { super.finish() }
             }
         }
     }
